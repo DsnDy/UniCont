@@ -6,4 +6,11 @@
 
 body {
 	font-family: 'Montserrat';
+	min-height: 100vh;
+}
+
+#root {
+	display: flex;
+	flex-direction: row;
+	min-height: 100vh;
 }

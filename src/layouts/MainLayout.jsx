@@ -1,28 +1,24 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import AppContext from '../context';
-import NavBar from '../components/NavBar';
-import useAuth, { AuthProvider } from '../hooks/useAuth';
-import { useEffect } from 'react';
+import { AuthProvider } from '../hooks/useAuth';
+import styles from '../styles.scss';
 
 const MainLayout = () => {
-	const { user } = useAuth();
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		if (!user) {
-			navigate('/login');
-		}
-		if (user) {
-			navigate('/home');
-		}
-	}, [user]);
+	const [search, setSearch] = useState('');
+	const [showInfo, setShowInfo] = useState(false);
 
 	return (
 		<AuthProvider>
-			<AppContext.Provider value={{}}>
-				{user && <NavBar />}
-				<div className='content'>
+			<AppContext.Provider
+				value={{
+					search,
+					setSearch,
+					showInfo,
+					setShowInfo
+				}}>
+				<div className='flex flex-row bg-[#F6FAFF] rounded-3xl w-[80%]'>
 					<Outlet />
 				</div>
 			</AppContext.Provider>

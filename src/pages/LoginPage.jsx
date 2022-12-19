@@ -30,7 +30,6 @@ const Login = () => {
 			await createUserWithEmailAndPassword(auth, email, password).then(
 				userCredential => {
 					setUser(userCredential.user);
-					userCredential.user.displayName = userName;
 					alert('Вы успешно зарегистрировались');
 					setDoc(doc(fs, 'users', userCredential.user.uid), {
 						uid: userCredential.user.uid,

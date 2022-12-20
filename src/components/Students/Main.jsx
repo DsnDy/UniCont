@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
 	collection,
 	getDocs,
@@ -16,10 +16,11 @@ import galka from '../../assets/galka.svg';
 import krest from '../../assets/krest.svg';
 import arrowSmall from '../../assets/arrowSmall.svg';
 import { useNavigate } from 'react-router-dom';
+import AppContext from '../../context';
 
 function Main() {
-	const [students, setStudents] = useState([]);
 	const [pairs, setPairs] = useState([]);
+	const { students, setStudents } = useContext(AppContext);
 
 	const [checkBox, setCheckBox] = useState();
 
@@ -73,7 +74,6 @@ function Main() {
 			setPairs(newData);
 		});
 	};
-	console.log(pairs);
 
 	useEffect(() => {
 		fetchData();
@@ -97,8 +97,8 @@ function Main() {
 							</h1>
 							<img
 								onClick={() =>
-									navigate(`/studentId:${key}`, {
-										state: { student, pairs, setPairs }
+									navigate(`/studentId:${student.id}`, {
+										state: { student, pairs }
 									})
 								}
 								src={arrowSmall}
@@ -114,6 +114,40 @@ function Main() {
 						/>
 					</div>
 				))}
+				<div className={styles.cartStudent}>
+					<div className='flex-[4] flex flex-row items-center'>
+						<h1 className='font-semibold text-2xl mr-3'>
+							Алиев Павел Игоревич
+						</h1>
+						<img
+							src={arrowSmall}
+							alt=''
+							className='w-[25px] h-[25px] cursor-pointer'
+						/>
+					</div>
+					<img
+						className='flex-1 items-center w-[40px] h-[40px] cursor-pointer'
+						alt=''
+						src={krest}
+					/>
+				</div>
+				<div className={styles.cartStudent}>
+					<div className='flex-[4] flex flex-row items-center'>
+						<h1 className='font-semibold text-2xl mr-3'>
+							Березин Виталий Алескеевич
+						</h1>
+						<img
+							src={arrowSmall}
+							alt=''
+							className='w-[25px] h-[25px] cursor-pointer'
+						/>
+					</div>
+					<img
+						className='flex-1 items-center w-[40px] h-[40px] cursor-pointer'
+						alt=''
+						src={krest}
+					/>
+				</div>
 			</div>
 		</div>
 	);

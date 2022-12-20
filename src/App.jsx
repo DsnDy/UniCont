@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import MainLayout from './layouts/MainLayout';
 import Login from './pages/LoginPage';
@@ -9,10 +9,11 @@ import UserInfo from './pages/UserInfo';
 import NavBar from './components/Navbar/NavBar';
 import useAuth from './hooks/useAuth';
 import StudentItemPage from './pages/StudentItemPage';
+import PairItem from './pages/PairItemPage';
+import EducItemPage from './pages/EducItemPage';
 
 function App() {
 	const user = useAuth();
-	const location = useLocation();
 
 	const ProtectedRoute = ({ children }) => {
 		if (!user) {
@@ -49,6 +50,24 @@ function App() {
 						<>
 							<NavBar />
 							<StudentItemPage />
+						</>
+					}
+				/>
+				<Route
+					path='pairs/:pairItem'
+					element={
+						<>
+							<NavBar />
+							<PairItem />
+						</>
+					}
+				/>
+				<Route
+					path='educations/:pairItem'
+					element={
+						<>
+							<NavBar />
+							<EducItemPage />
 						</>
 					}
 				/>

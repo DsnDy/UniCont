@@ -8,6 +8,7 @@ import styles from '../styles.scss';
 const MainLayout = () => {
 	const [search, setSearch] = useState('');
 	const [showInfo, setShowInfo] = useState(false);
+	const [students, setStudents] = useState([]);
 
 	return (
 		<AuthProvider>
@@ -16,7 +17,9 @@ const MainLayout = () => {
 					search,
 					setSearch,
 					showInfo,
-					setShowInfo
+					setShowInfo,
+					students,
+					setStudents
 				}}>
 				<div className='flex flex-row bg-[#F6FAFF] rounded-3xl w-[80%]'>
 					<Outlet />

@@ -2,12 +2,11 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Main from '../components/StudentItem/Main';
 
-function StudentPage() {
+const StudentPage = () => {
 	const location = useLocation();
 	const student = location.state.student;
 	const pairs = location.state.pairs;
 
-	console.log(pairs);
 	return (
 		<div className='mt-[50px] w-full mr-20'>
 			<div className='mb-[50px]'>
@@ -31,6 +30,6 @@ function StudentPage() {
 			<Main student={student} pairs={pairs} />
 		</div>
 	);
-}
+};
 
 export default StudentPage;

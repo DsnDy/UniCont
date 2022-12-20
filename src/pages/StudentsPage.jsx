@@ -52,9 +52,7 @@ const Students = () => {
 						<h3 className='font-medium text-lg'>{prepod.univ}</h3>
 					</div>
 				))}
-				<div className='flex flex-row items-center'>
-					<Search />
-				</div>
+				<div className='flex flex-row items-center'>{/* <Search /> */}</div>
 			</div>
 			<Main />
 		</div>

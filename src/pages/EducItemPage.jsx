@@ -1,5 +1,5 @@
-import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
-import React, { useEffect, useRef, useState } from 'react';
+import { doc, updateDoc } from 'firebase/firestore';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { fs } from '../firebase';
 
@@ -15,6 +15,9 @@ const EducItemPage = () => {
 	const [three, setThree] = useState('3');
 	const [four, setFour] = useState('4');
 	const [five, setFive] = useState('5');
+	const [resZach, setResZach] = useState('Зачет');
+	const [resNoneZach, setResNoneZach] = useState('Не зачет');
+	const [resNanZach, setResNanZach] = useState('-');
 
 	const [ekz, setEkz] = useState('Экзамен');
 	const [zach, setZach] = useState('Зачет');
@@ -27,6 +30,7 @@ const EducItemPage = () => {
 			})
 				.then(() => {
 					console.log('nan update');
+					alert('Успешно');
 				})
 				.catch(error => {
 					console.log(error);
@@ -38,6 +42,7 @@ const EducItemPage = () => {
 			})
 				.then(() => {
 					console.log('one update');
+					alert('Успешно');
 				})
 				.catch(error => {
 					console.log(error);
@@ -49,6 +54,7 @@ const EducItemPage = () => {
 			})
 				.then(() => {
 					console.log('two update');
+					alert('Успешно');
 				})
 				.catch(error => {
 					console.log(error);
@@ -60,6 +66,7 @@ const EducItemPage = () => {
 			})
 				.then(() => {
 					console.log('three update');
+					alert('Успешно');
 				})
 				.catch(error => {
 					console.log(error);
@@ -71,6 +78,7 @@ const EducItemPage = () => {
 			})
 				.then(() => {
 					console.log('four update');
+					alert('Успешно');
 				})
 				.catch(error => {
 					console.log(error);
@@ -82,6 +90,47 @@ const EducItemPage = () => {
 			})
 				.then(() => {
 					console.log('five update');
+					alert('Успешно');
+				})
+				.catch(error => {
+					console.log(error);
+				});
+		}
+	};
+
+	const handleChangeZach = async (resZach, resNoneZach, resNanZach) => {
+		const btnRef = doc(fs, 'pairs', pair.id);
+		if (resZach) {
+			await updateDoc(btnRef, {
+				resZach: resZach
+			})
+				.then(() => {
+					console.log('Зачет update');
+					alert('Успешно');
+				})
+				.catch(error => {
+					console.log(error);
+				});
+		}
+		if (resNoneZach) {
+			await updateDoc(btnRef, {
+				resZach: resNoneZach
+			})
+				.then(() => {
+					console.log('Не зачет update');
+					alert('Успешно');
+				})
+				.catch(error => {
+					console.log(error);
+				});
+		}
+		if (resNanZach) {
+			await updateDoc(btnRef, {
+				resZach: resNanZach
+			})
+				.then(() => {
+					console.log('- update');
+					alert('Успешно');
 				})
 				.catch(error => {
 					console.log(error);
@@ -178,6 +227,41 @@ const EducItemPage = () => {
 					</div>
 				</div>
 			)}
+			{pair.type === 'Зачет' && (
+				<div className='flex mb-10 flex-row items-center'>
+					<div className='flex items-center'>
+						<h2 className='font-semibold text-xl text-black mr-5'>
+							Поставьте результат
+						</h2>
+						<div
+							onClick={() => {
+								setResZach('Зачет');
+								handleChangeZach(resZach);
+							}}
+							className='pt-2 pb-2 pl-5 pr-5 bg-[#4AA09E] rounded-2xl mr-5 text-center cursor-pointer'>
+							<span className='text-white font-semibold text-3xxl'>Зачет</span>
+						</div>
+						<div
+							onClick={() => {
+								setResNoneZach('Не зачет');
+								handleChangeZach(resNoneZach);
+							}}
+							className='pt-2 pb-2 pl-5 pr-5 bg-rose-500 rounded-2xl mr-5 text-center cursor-pointer'>
+							<span className='text-white font-semibold text-3xxl'>
+								Не зачет
+							</span>
+						</div>
+						<div
+							onClick={() => {
+								setResNanZach('-');
+								handleChangeZach(resNanZach);
+							}}
+							className='pt-2 pb-2 pl-5 pr-5 bg-gray-500 rounded-2xl mr-5 text-center cursor-pointer'>
+							<span className='text-white font-semibold text-3xxl'>-</span>
+						</div>
+					</div>
+				</div>
+			)}
 			<div className='flex mb-10 flex-row items-center'>
 				<div className='flex items-center'>
 					<h2 className='font-semibold text-xl text-black mr-5'>
@@ -201,10 +285,10 @@ const EducItemPage = () => {
 					</div>
 				</div>
 			</div>
-			<div className='flex justify-center'>
+			<div className='flex'>
 				<button
 					onClick={() => navigate(-1)}
-					className='p-2 bg-slate-500 rounded-2xl'>
+					className='pt-2 pb-2 pl-5 pr-5 bg-slate-500 rounded-2xl'>
 					<h2 className='font-semibold text-lg text-white'>Закрыть</h2>
 				</button>
 			</div>

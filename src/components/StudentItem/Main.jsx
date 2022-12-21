@@ -2,16 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './StudentItem.module.scss';
 import arrowSmall from '../../assets/arrowSmall.svg';
-import {
-	collection,
-	doc,
-	getDoc,
-	getDocs,
-	onSnapshot,
-	query,
-	updateDoc,
-	where
-} from 'firebase/firestore';
+import { collection, getDocs, query } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { fs } from '../../firebase';
 
@@ -115,7 +106,14 @@ function Main() {
 											})
 										}>
 										<div className='flex flex-1 border-b p-2 flex-row'>
-											<h1 className='font-medium text-xl mr-3'>{pair.res}</h1>
+											{pair.type === 'Экзамен' && (
+												<h1 className='font-medium text-xl mr-3'>{pair.res}</h1>
+											)}
+											{pair.type === 'Зачет' && (
+												<h1 className='font-medium text-xl mr-3'>
+													{pair.resZach}
+												</h1>
+											)}
 											<img
 												src={arrowSmall}
 												alt=''

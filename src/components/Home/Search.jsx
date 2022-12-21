@@ -19,7 +19,7 @@ function Search() {
 				type='text'
 				className='text-gray-400 outline-none'
 			/>
-			<img src={lupa} alt='поиск' className='mr-3' />
+			<img src={lupa} alt='поиск' />
 		</button>
 	);
 }

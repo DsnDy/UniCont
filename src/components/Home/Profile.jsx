@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import profile from '../../assets/profile.svg';
-import AppContext from '../../context';
 
 function Profile() {
 	const navigate = useNavigate();

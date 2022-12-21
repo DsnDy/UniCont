@@ -5,7 +5,6 @@ import Login from './pages/LoginPage';
 import Students from './pages/StudentsPage';
 import Staff from './pages/StaffPage';
 import Faq from './pages/FaqPage';
-import UserInfo from './pages/UserInfo';
 import NavBar from './components/Navbar/NavBar';
 import useAuth from './hooks/useAuth';
 import StudentItemPage from './pages/StudentItemPage';
@@ -86,15 +85,6 @@ function App() {
 						<>
 							<NavBar />
 							<Faq />
-						</>
-					}
-				/>
-				<Route
-					path='userInfo'
-					element={
-						<>
-							<NavBar />
-							<UserInfo />
 						</>
 					}
 				/>

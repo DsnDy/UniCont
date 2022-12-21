@@ -8,6 +8,7 @@ import { doc, setDoc } from 'firebase/firestore';
 
 import { auth, fs } from '../firebase';
 import useAuth from '../hooks/useAuth';
+import styles from './LoginPage.module.scss';
 
 const Login = () => {
 	const { setUser, user } = useAuth();
@@ -23,7 +24,7 @@ const Login = () => {
 	const [userName, setUserName] = useState('');
 	const [password, setPassword] = useState('');
 	const [key, setKey] = useState('');
-	const [isRegister, setIsRegister] = useState(false);
+	const [isRegister, setIsRegister] = useState(true);
 
 	const signUp = async () => {
 		try {
@@ -70,30 +71,34 @@ const Login = () => {
 		setKey(e.target.value);
 	};
 	return (
-		<div className='flex flex-1 justify-center bg-[#0866D1]'>
-			<div className='m-auto p-4 rounded-2xl text-center bg-white'>
-				<div className='flex flex-row mb-5'>
-					<button
-						className='p-3 mr-5 bg-black text-white text-3xl font-medium rounded-2xl hover:bg-[#0866D1] hover:text-white'
-						onClick={() => setIsRegister(false)}>
-						Регистрация
-					</button>
-					<button
-						className='p-3 mr-5 bg-black text-white text-3xl font-medium rounded-2xl hover:bg-[#0866D1] hover:text-white'
-						onClick={() => setIsRegister(true)}>
-						Вход
-					</button>
+		<div className='flex flex-1 justify-center bg-[#044DA0]'>
+			<div className='m-auto p-10 w-[25%] rounded-2xl text-center bg-[#FFFFFF]'>
+				<div className='mb-5'>
+					{!isRegister && (
+						<h2
+							className='text-black text-xl font-medium text-center'
+							onClick={() => setIsRegister(false)}>
+							Регистрация
+						</h2>
+					)}
+					{isRegister && (
+						<h2
+							className='text-black font-medium text-xl text-center'
+							onClick={() => setIsRegister(true)}>
+							Добро пожаловать!
+						</h2>
+					)}
 				</div>
 				<div className='flex flex-col text-left'>
 					{isRegister && (
-						<>
-							<h3 className='font-medium text-black mb-2 text-lg'>Почта</h3>
+						<div className='flex justify-center flex-col text-left'>
+							<h3 className='font-medium text-black mb-2 text-lg'>E-mail</h3>
 							<input
 								type='email'
 								placeholder='Введите почту'
 								value={email}
 								onChange={handleChangeEmail}
-								className='mb-3 rounded-full p-2 text-gray-400 outline-none border-b-[1px] border-b-black'
+								className={styles.input}
 							/>
 							<h3 className='font-medium text-black mb-2 text-lg'>Пароль</h3>
 							<input
@@ -101,24 +106,24 @@ const Login = () => {
 								placeholder='Введите пароль'
 								value={password}
 								onChange={handleChangePassword}
-								className='mb-3 rounded-full p-2 text-gray-400 outline-none border-b-[1px] border-b-black'
+								className={styles.input}
 							/>
 							<button
-								className='bg-black rounded-2xl p-3 text-white text-xl font-semibold cursor-pointer hover:bg-[#0866D1] hover:text-white'
+								className='bg-[#044DA0] rounded-2xl p-3 text-white text-2xl font-semibold cursor-pointer hover:bg-[#0866D1] hover:text-white'
 								onClick={signIn}>
 								Войти
 							</button>
-						</>
+						</div>
 					)}
 					{!isRegister && (
 						<>
-							<h3 className='font-medium text-black mb-2 text-lg'>Почта</h3>
+							<h3 className='font-medium text-black mb-2 text-lg'>E-mail</h3>
 							<input
 								type='email'
 								placeholder='Введите почту'
 								value={email}
 								onChange={handleChangeEmail}
-								className='mb-3 rounded-full p-2 text-gray-400 outline-none border-b-[1px] border-b-black'
+								className={styles.input}
 							/>
 							<h3 className='font-medium text-black mb-2 text-lg'>Ф.И.О.</h3>
 							<input
@@ -126,7 +131,7 @@ const Login = () => {
 								placeholder='Введите ваше ФИО'
 								value={userName}
 								onChange={e => setUserName(e.target.value)}
-								className='mb-3 rounded-full p-2 text-gray-400 outline-none border-b-[1px] border-b-black'
+								className={styles.input}
 							/>
 							<h3 className='font-medium text-black mb-2 text-lg'>Пароль</h3>
 							<input
@@ -134,7 +139,7 @@ const Login = () => {
 								placeholder='Введите пароль'
 								value={password}
 								onChange={handleChangePassword}
-								className='mb-3 rounded-full p-2 text-gray-400 outline-none border-b-[1px] border-b-black'
+								className={styles.input}
 							/>
 							<h3 className='font-medium text-black mb-2 text-lg'>Ключ</h3>
 							<input
@@ -142,15 +147,25 @@ const Login = () => {
 								placeholder='#'
 								value={key}
 								onChange={handleChangeKey}
-								className='mb-4 rounded-full p-2 text-gray-400 outline-none border-b-[1px] border-b-black'
+								className={styles.input}
 							/>
 							<button
-								className='bg-black rounded-2xl p-3 text-white text-xl font-semibold cursor-pointer hover:bg-[#0866D1] hover:text-white'
+								className='bg-[#044DA0] rounded-2xl p-3 text-white text-2xl font-semibold cursor-pointer hover:bg-[#0866D1] hover:text-white'
 								onClick={signUp}>
 								Зарегистрироваться
 							</button>
 						</>
 					)}
+					<div className='flex justify-between mt-5'>
+						<h2 className='text-[#044DA0] font-medium text-lg border-b-[1px] border-b-[#044DA0] cursor-pointer'>
+							Забыли пароль?
+						</h2>
+						<h2
+							className='text-[#044DA0] font-medium text-lg border-b-[1px] border-b-[#044DA0] cursor-pointer'
+							onClick={() => setIsRegister(!isRegister)}>
+							{isRegister ? 'Нет аккаунта?' : 'Есть аккаунт?'}
+						</h2>
+					</div>
 				</div>
 			</div>
 		</div>

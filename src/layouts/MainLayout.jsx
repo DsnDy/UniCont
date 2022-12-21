@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 
 import AppContext from '../context';
 import { AuthProvider } from '../hooks/useAuth';
-import styles from '../styles.scss';
 
 const MainLayout = () => {
 	const [search, setSearch] = useState('');
@@ -21,7 +20,7 @@ const MainLayout = () => {
 					students,
 					setStudents
 				}}>
-				<div className='flex flex-row bg-[#F6FAFF] rounded-3xl w-[80%]'>
+				<div className='flex flex-row bg-[#F6FAFF] rounded-3xl w-full'>
 					<Outlet />
 				</div>
 			</AppContext.Provider>

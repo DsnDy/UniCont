@@ -1,19 +1,13 @@
-import React, { useContext } from 'react';
-
-import Profile from '../components/Home/Profile';
-import Search from '../components/Home/Search';
-import AppContext from '../context';
+import React from 'react';
 import { auth } from '../firebase';
-import useAuth from '../hooks/useAuth';
-import styles from './Students.module.scss';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { fs } from '../firebase';
 import { useEffect, useState } from 'react';
 import Main from '../components/Students/Main';
+import Search from '../components/Home/Search';
 
 const Students = () => {
 	const user = auth.currentUser;
-	const [students, setStudents] = useState([]);
 	const [prepods, setPrepods] = useState([]);
 
 	const fetchPrepods = async () => {
@@ -27,20 +21,10 @@ const Students = () => {
 		});
 	};
 
-	const fetchStudents = async () => {
-		const q = query(collection(fs, 'students'));
-
-		await getDocs(q).then(snapshot => {
-			const newData = snapshot.docs.map(doc => ({
-				...doc.data()
-			}));
-			setStudents(newData);
-		});
-	};
+	console.log(prepods);
 
 	useEffect(() => {
 		fetchPrepods();
-		fetchStudents();
 	}, []);
 
 	return (
@@ -52,7 +36,6 @@ const Students = () => {
 						<h3 className='font-medium text-lg'>{prepod.univ}</h3>
 					</div>
 				))}
-				<div className='flex flex-row items-center'>{/* <Search /> */}</div>
 			</div>
 			<Main />
 		</div>

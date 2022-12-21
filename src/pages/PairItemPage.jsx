@@ -50,25 +50,29 @@ function PairItem() {
 		}
 	};
 	return (
-		<div className='flex flex-col mt-20 items-center w-full'>
+		<div className='flex flex-col mt-20 w-full'>
 			<h2 className='font-semibold text-3xl text-black mb-5'>{pair.pair}</h2>
-			<div className='flex mb-10'>
-				<button
-					className='p-4 bg-rose-400 rounded-2xl mr-10'
-					onClick={handleChangeEducation}>
-					<h2 className='font-semibold text-lg text-white'>В процессе</h2>
-				</button>
-				<button
-					className='p-4 bg-green-500 rounded-2xl'
-					onClick={handleChangeEducation}>
-					<h2 className='font-semibold text-lg text-white'>Изученно</h2>
-				</button>
+			<div className='flex flex-col mb-10'>
+				<div className='flex flex-row'>
+					<button
+						className='p-4 bg-[#0866D1] rounded-2xl mr-10'
+						onClick={handleChangeEducation}>
+						<h2 className='font-semibold text-lg text-white'>В процессе</h2>
+					</button>
+					<button
+						className='p-4 bg-[#4AA09E] rounded-2xl'
+						onClick={handleChangeEducation}>
+						<h2 className='font-semibold text-lg text-white'>Изученно</h2>
+					</button>
+				</div>
+				<div className='mt-7 items-center'>
+					<button
+						onClick={() => navigate(-1)}
+						className='p-4 bg-slate-500 rounded-2xl'>
+						<h2 className='font-semibold text-lg text-white'>Закрыть</h2>
+					</button>
+				</div>
 			</div>
-			<button
-				onClick={() => navigate(-1)}
-				className='p-2 bg-slate-500 rounded-2xl'>
-				<h2 className='font-semibold text-lg text-white'>Закрыть</h2>
-			</button>
 		</div>
 	);
 }
